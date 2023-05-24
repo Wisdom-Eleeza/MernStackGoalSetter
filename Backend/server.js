@@ -1,9 +1,14 @@
 //entering point
 const express = require("express");
+const colors = require('colors')
+const connectDB = require('./config/db')
 const { errorHandler } = require('./middleware/errorMiddleware')
 const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.PORT || 4000;
+
+
+connectDB()
 
 const app = express();
 app.use(express.json());

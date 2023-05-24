@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler')
+const Goal = require('../models/goalModel')
 
 const getGoals = async (req, res) => {
+    const goals = await Goal.find()
     res.status(200).json({message: 'Get goals'})
 }
 
@@ -18,7 +20,7 @@ const updateGoals = asyncHandler (async (req, res) => {
 
 const deleteGoals = asyncHandler (async (req, res) => {
     res.status(200).json({message: `Delete goal ${req.params.id}`})
-})
+}) 
 
 
 
