@@ -1,0 +1,1 @@
+CommandToRunServer: npm run server
