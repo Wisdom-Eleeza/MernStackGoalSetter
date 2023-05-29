@@ -70,13 +70,14 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/me
 // @access Private
 const getUserFromDatabase = asyncHandler(async (req, res) => {
+  res.status(200).json(req.user._id)
   // when the user hits on their route, they should get their info...
-  const { _id, name, email } = await userModel.findById(req.user.id);
-  res.status(200).json({
-    id: _id,
-    name,
-    email,
-  });
+  // const { _id, name, email } = await userModel.findById(req.user.id);
+  // res.status(200).json({
+  //   id: _id,
+  //   name,
+  //   email,
+  // });
 });
 
 // function to Generate JWT token

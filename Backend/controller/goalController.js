@@ -4,7 +4,8 @@ const User = require("../models/userModel");
 
 const getGoals = async (req, res) => {
   console.log(req.headers.authorization);
-  const goals = await Goal.find({ userID: req.user._id });
+  // const goals = await Goal.find({ userID: req.user }); 
+  const goals = await Goal.find({ userID: req.user.id }); 
   // console.log('user::', req.user.id);
   res.status(200).json(goals);
 };
@@ -30,14 +31,14 @@ const updateGoals = asyncHandler(async (req, res) => {
     throw new Error("Goal not found");
   }
 
-  const user = await User.findById(req.user.id);
+  // const user = await User.findById(req.user.id);
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
   // making sure the loggedIn user matches the goal user
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }

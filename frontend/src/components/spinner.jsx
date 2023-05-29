@@ -1,9 +1,9 @@
-function spinner() {
+function Spinner() {
   return (
-    <div className="loadingSpinnerContainer">
-        <div className="loadingSpinner"></div>
+    <div className='loadingSpinnerContainer'>
+      <div className='loadingSpinner'></div>
     </div>
   )
 }
 
-export default spinner
+export default Spinner
