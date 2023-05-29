@@ -29,21 +29,8 @@ function Login () {
       </section>
 
       <section className="form">
-        {/* <div className="form-group">
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              placeholder="Enter your name please"
-              onChange={onChange}
-            />
-          </form>
-        </div> */}
         <div className="form-group">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               type="email "
               className="form-control"
@@ -68,20 +55,7 @@ function Login () {
               onChange={onChange}
             />
           </form>
-        </div>
-        {/* <div className="form-group">
-          <form>
-            <input
-              type="password"
-              className="form-control"
-              id="password2"
-              name="password2"
-              value={password2}
-              placeholder="Confirm Password"
-              onChange={onChange}
-            />
-          </form>
-        </div> */}
+        </div> 
         <div className="form-group">
           <button type="submit" className="btn btn-block">
             Submit

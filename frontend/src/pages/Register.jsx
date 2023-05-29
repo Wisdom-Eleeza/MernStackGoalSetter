@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
+import { register } from "../features/auth/authService";
+import Spinner from "../components/spinner";
+
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,16 +16,45 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+  }, [user, isError, isSuccess, message, navigate]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
-        ...prevState,
-        //key value which is set to name={name}
-        [e.target.name]: e.target.value,
-    }))
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
+
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    if (password !== password2) {
+      toast.error("Passwords do not match");
+    } else {
+      const userData = { name, email, password };
+      dispatch(register(userData));
+    }
   };
+
+  // Spinning
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -45,21 +80,20 @@ function Register() {
           </form>
         </div>
         <div className="form-group">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
-              type="email "
+              type="email"
               className="form-control"
               id="email"
               name="email"
               value={email}
               placeholder="Enter your email please"
-              password
               onChange={onChange}
             />
           </form>
         </div>
         <div className="form-group">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               type="password"
               className="form-control"
@@ -72,7 +106,7 @@ function Register() {
           </form>
         </div>
         <div className="form-group">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               type="password"
               className="form-control"
@@ -85,7 +119,7 @@ function Register() {
           </form>
         </div>
         <div className="form-group">
-          <button type="submit" className="btn btn-block">
+          <button type="submit" className="btn btn-block" onClick={onSubmit}>
             Submit
           </button>
         </div>
