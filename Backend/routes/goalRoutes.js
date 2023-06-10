@@ -14,7 +14,7 @@ router.route('/:id').put( protectedRoute, updateGoals).delete( protectedRoute, d
 // router.get('/', getGoals)
 // router.post('/', createGoals)
 // router.put('/:id', updateGoals)
-// router.put('/:id', deleteGoals)
+// router.delete('/:id', deleteGoals)
 
 
 module.exports = router
